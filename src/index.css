@@ -3,3 +3,21 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.leftSide {
+  display:flex;
+  
+}
+
+.widget {
+  width:275px;
+  height:150px;
+  padding:12px;
+  background-color:#D34735;
+  clear:all;
+  margin-bottom:10px;
+}
+
+.widget>img {
+  width:120px;
+}
