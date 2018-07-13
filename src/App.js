@@ -15,23 +15,23 @@ class App extends Component {
     this.getMethod = this.getMethod.bind(this);
   }
 
-  componentDidMount(){    
-    let promise = axios.get('/api/inventory')
-    promise.then(res => {  
-      this.setState({  
-        inventory: res.data
-    // inventory: res.data.results 
-      })
-    })
-  }
+  // componentDidMount(){    
+  //   let promise = axios.get('/api/inventory')
+  //   promise.then(res => {  
+  //     this.setState({  
+  //       inventory: res.data
+  //   // inventory: res.data.results 
+  //     })
+  //   })
+  // }
 
   getMethod(){
-    let promise = axios.get('/api/quotes')
+    let promise = axios.get('/api/inventory')
     promise.then(res => {   
       return(res.data)
       })
     }
-  }
+
 
   render() {
     ///////// PROVES STATE.INVENTORY GETS LOADED

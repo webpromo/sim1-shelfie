@@ -1,6 +1,7 @@
 
 
 import React, {Component } from 'react';
+import axios from 'axios';
 // import './App.css';
 
 class Form extends Component {
@@ -15,12 +16,12 @@ constructor(){
 
 updateUrl(newUrl) {
   this.setState({
-    url: newUrl
+    imgurl: newUrl
   })
 }
 updateProduct(newProduct) {
   this.setState({
-    product: newProduct
+    name: newProduct
   })
 }
 updatePrice(newPrice) {
@@ -28,25 +29,38 @@ updatePrice(newPrice) {
     price: newPrice
   })
 }
-didCancel(){  // WORKS! at 12:03pm
+didCancel(){   // clear inputs
   this.setState({
-    url: "",
-    product: "",
+    imgurl: "",
+    name: "",
     price: 0
   })
 }
+
+postRequest(){
+  let newProdObj={
+    name: this.name,
+    price: this.price,
+    img: this.imgurl
+  }
+  let promise = axios.post('/api/inventory/', {newProdObj})
+  promise.then(res => {   
+      // let newest = res.data[res.data.length-1]
+    this.didCancel()
+  })}
+
     render() {
       return (
   
         <div className="form">
         <div className="fields">
-          <input type="text" onChange={(e) => this.updateUrl(e.target.value)} value={this.state.url} />
-          <input type="text" onChange={(e) => this.updateProduct(e.target.value)} value={this.state.product} />
+          <input type="text" onChange={(e) => this.updateUrl(e.target.value)} value={this.state.imgurl} />
+          <input type="text" onChange={(e) => this.updateProduct(e.target.value)} value={this.state.name} />
           <input type="text" onChange={(e) => this.updatePrice(e.target.value)} value={this.state.price} placeholder = "0" />
         </div>
         <div className="formButtons">
           <button onClick={() => this.didCancel()} >Cancel</button>
-          <button>Add to Inventory</button>
+          <button onClick={() => this.postRequest()}>Add to Inventory</button>
         </div>
       </div>
  

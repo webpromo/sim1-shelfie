@@ -16,8 +16,8 @@ const pc = require('./controller.js');
 
 /// END POINTS
 
-app.get('/api/inventory', pc.read);
-// app.post('/api/product', pc.create);
+// app.get('/api/inventory', pc.read);
+app.post('/api/inventory', pc.create);
 
 
 
