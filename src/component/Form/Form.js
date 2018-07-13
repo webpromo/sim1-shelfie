@@ -43,7 +43,7 @@ postRequest(){
     price: this.price,
     img: this.imgurl
   }
-  let promise = axios.post('/api/inventory/', {newProdObj})
+  let promise = axios.post('/api/product/', {newProdObj})
   promise.then(res => {   
       // let newest = res.data[res.data.length-1]
     this.didCancel()

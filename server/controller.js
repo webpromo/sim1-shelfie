@@ -18,6 +18,7 @@ module.exports = {
         price: price,
         img: img
       }
+      // this is where to use massive using db instance
       products.push( product );
       id++;
       res.status(200).send( products );
