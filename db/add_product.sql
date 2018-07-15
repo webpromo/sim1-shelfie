@@ -1,3 +1,3 @@
 
 
-INSERT INTO products (name,price,img) values ($1,$2,$3)
+INSERT INTO products (name,price,img) values ($1,$2,$3) returning *;

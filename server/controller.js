@@ -1,26 +1,29 @@
 
-let products = [];
-let id=0;
 
 module.exports = {
-    read: ( req, res ) => {  /// HAS BUGS
-        const dbInstance = req.app.get('db');
+    read: ( req, res ) => {  
+        const dbInstance = req.app.get('db'); // same with each endpoint
         dbInstance.get_inventory()
         .then(inventory => res.status(200).send(inventory))
         .catch(err => {
             res.status(500).send({errorMessage: "It's not you, it's us."});
         })
     },
-    create: ( req, res ) => {   // BUGS
+    create: ( req, res ) => {  
+        const dbInstance = req.app.get('db');
       const { name, price, img } = req.body;
-      let product = {
-        name: name,
-        price: price,
-        img: img
-      }
-      // this is where to use massive using db instance
-      products.push( product );
-      id++;
-      res.status(200).send( products );
+      dbInstance.add_product([name, price, img]).then(newProduct => res.status(200).send(newProduct));
+    } ,
+    update: ( req, res ) => {  
+        const dbInstance = req.app.get('db');
+      const { id, name, price, img } = req.body;
+      dbInstance.update_product([id, name, price, img]).then(updatedProduct => {
+        console.log(updatedProduct)
+        res.status(200).send(updatedProduct)});
+    } ,
+    delete: ( req, res ) => {  
+        const dbInstance = req.app.get('db');
+      const { id } = req.body;
+      dbInstance.nix_product([id]).then(() => res.status(200).send("Product deleted"));
     } 
 } 
